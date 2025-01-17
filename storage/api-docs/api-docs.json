@@ -1,0 +1,956 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Documentation",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "/api"
+        }
+    ],
+    "paths": {
+        "/v1/buildings": {
+            "get": {
+                "tags": [
+                    "Building"
+                ],
+                "summary": "Получение списка зданных",
+                "operationId": "GetBuildings",
+                "responses": {
+                    "200": {
+                        "description": "OK. Список получен",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/BuildingResource"
+                                            }
+                                        },
+                                        "links": {
+                                            "properties": {
+                                                "first": {
+                                                    "title": "first",
+                                                    "type": "string",
+                                                    "example": "http://127.0.0.1:8000/api/v1/buildings?page=1"
+                                                },
+                                                "last": {
+                                                    "title": "last",
+                                                    "type": "string",
+                                                    "example": "http://127.0.0.1:8000/api/v1/buildings?page=1"
+                                                },
+                                                "prev": {
+                                                    "title": "prev",
+                                                    "type": "null|string",
+                                                    "example": "null"
+                                                },
+                                                "next": {
+                                                    "title": "next",
+                                                    "type": "null|string",
+                                                    "example": "null"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "meta": {
+                                            "properties": {
+                                                "current_page": {
+                                                    "title": "current_page",
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "from": {
+                                                    "title": "from",
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "last_page": {
+                                                    "title": "last_page",
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "links": {
+                                                    "type": "object",
+                                                    "example": [
+                                                        {
+                                                            "url": null,
+                                                            "label": "&laquo; Previous",
+                                                            "active": false
+                                                        },
+                                                        {
+                                                            "url": "http://127.0.0.1:8000/api/v1/buildings?page=1",
+                                                            "label": "1",
+                                                            "active": true
+                                                        },
+                                                        {
+                                                            "url": null,
+                                                            "label": "Next &raquo;",
+                                                            "active": false
+                                                        }
+                                                    ]
+                                                },
+                                                "path": {
+                                                    "title": "path",
+                                                    "type": "null|string",
+                                                    "example": "http://127.0.0.1:8000/api/v1/buildings"
+                                                },
+                                                "per_page": {
+                                                    "title": "per_page",
+                                                    "type": "integer",
+                                                    "example": "15"
+                                                },
+                                                "to": {
+                                                    "title": "to",
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "total": {
+                                                    "title": "total",
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/organizations/buildings/{buildingId}": {
+            "get": {
+                "tags": [
+                    "Organization"
+                ],
+                "summary": "Получение списка всех организаций находящихся в конкретном здании",
+                "operationId": "GetOrganizationByBuilding",
+                "parameters": [
+                    {
+                        "name": "buildingId",
+                        "in": "path",
+                        "description": "ID здании.",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. Список получен",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/OrganizationResource"
+                                            }
+                                        },
+                                        "links": {
+                                            "properties": {
+                                                "first": {
+                                                    "title": "first",
+                                                    "type": "string",
+                                                    "example": "http://127.0.0.1:8000/api/v1/organizations/buildings/2?page=1"
+                                                },
+                                                "last": {
+                                                    "title": "last",
+                                                    "type": "string",
+                                                    "example": "http://127.0.0.1:8000/api/v1/organizations/buildings/2?page=1"
+                                                },
+                                                "prev": {
+                                                    "title": "prev",
+                                                    "type": "null|string",
+                                                    "example": "null"
+                                                },
+                                                "next": {
+                                                    "title": "next",
+                                                    "type": "null|string",
+                                                    "example": "null"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "meta": {
+                                            "properties": {
+                                                "current_page": {
+                                                    "title": "current_page",
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "from": {
+                                                    "title": "from",
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "last_page": {
+                                                    "title": "last_page",
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "links": {
+                                                    "type": "object",
+                                                    "example": [
+                                                        {
+                                                            "url": null,
+                                                            "label": "&laquo; Previous",
+                                                            "active": false
+                                                        },
+                                                        {
+                                                            "url": "http://127.0.0.1:8000/api/v1/organizations/buildings/2?page=1",
+                                                            "label": "1",
+                                                            "active": true
+                                                        },
+                                                        {
+                                                            "url": null,
+                                                            "label": "Next &raquo;",
+                                                            "active": false
+                                                        }
+                                                    ]
+                                                },
+                                                "path": {
+                                                    "title": "path",
+                                                    "type": "null|string",
+                                                    "example": "http://127.0.0.1:8000/api/v1/organizations/buildings/2"
+                                                },
+                                                "per_page": {
+                                                    "title": "per_page",
+                                                    "type": "integer",
+                                                    "example": "15"
+                                                },
+                                                "to": {
+                                                    "title": "to",
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "total": {
+                                                    "title": "total",
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/organizations/{organization}": {
+            "get": {
+                "tags": [
+                    "Organization"
+                ],
+                "summary": "Получение информации об организации по её идентификатору",
+                "operationId": "GetOrganizationById",
+                "parameters": [
+                    {
+                        "name": "organization",
+                        "in": "path",
+                        "description": "ID организаци.",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. Информация получена",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/OrganizationResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/organizations/activities/{activityId}": {
+            "get": {
+                "tags": [
+                    "Organization"
+                ],
+                "summary": "Получение списка всех организаций, которые относятся к указанному виду деятельности",
+                "operationId": "GetOrganizationByActivity",
+                "parameters": [
+                    {
+                        "name": "activityId",
+                        "in": "path",
+                        "description": "ID деятельности.",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. Список получен",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/OrganizationResource"
+                                            }
+                                        },
+                                        "links": {
+                                            "properties": {
+                                                "first": {
+                                                    "title": "first",
+                                                    "type": "string",
+                                                    "example": "http://127.0.0.1:8000/api/v1/organizations/activities/2?page=1"
+                                                },
+                                                "last": {
+                                                    "title": "last",
+                                                    "type": "string",
+                                                    "example": "http://127.0.0.1:8000/api/v1/organizations/activities/2?page=1"
+                                                },
+                                                "prev": {
+                                                    "title": "prev",
+                                                    "type": "null|string",
+                                                    "example": "null"
+                                                },
+                                                "next": {
+                                                    "title": "next",
+                                                    "type": "null|string",
+                                                    "example": "null"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "meta": {
+                                            "properties": {
+                                                "current_page": {
+                                                    "title": "current_page",
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "from": {
+                                                    "title": "from",
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "last_page": {
+                                                    "title": "last_page",
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "links": {
+                                                    "type": "object",
+                                                    "example": [
+                                                        {
+                                                            "url": null,
+                                                            "label": "&laquo; Previous",
+                                                            "active": false
+                                                        },
+                                                        {
+                                                            "url": "http://127.0.0.1:8000/api/v1/organizations/activities/2?page=1",
+                                                            "label": "1",
+                                                            "active": true
+                                                        },
+                                                        {
+                                                            "url": null,
+                                                            "label": "Next &raquo;",
+                                                            "active": false
+                                                        }
+                                                    ]
+                                                },
+                                                "path": {
+                                                    "title": "path",
+                                                    "type": "null|string",
+                                                    "example": "http://127.0.0.1:8000/api/v1/organizations/activities/2"
+                                                },
+                                                "per_page": {
+                                                    "title": "per_page",
+                                                    "type": "integer",
+                                                    "example": "15"
+                                                },
+                                                "to": {
+                                                    "title": "to",
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "total": {
+                                                    "title": "total",
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/organizations/radius": {
+            "get": {
+                "tags": [
+                    "Organization"
+                ],
+                "summary": "Получение списка всех организаций, которые находятся в заданном радиусе/прямоугольной области",
+                "operationId": "GetOrganizationByRadius",
+                "parameters": [
+                    {
+                        "name": "radius",
+                        "in": "query",
+                        "description": "Радиус поиска",
+                        "required": true,
+                        "example": "156"
+                    },
+                    {
+                        "name": "latitude",
+                        "in": "query",
+                        "description": "Широта.",
+                        "required": true,
+                        "example": "-11.4353650"
+                    },
+                    {
+                        "name": "longitude",
+                        "in": "query",
+                        "description": "Долгота",
+                        "required": true,
+                        "example": "108.4345110"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. Список получен",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/OrganizationResource"
+                                            }
+                                        },
+                                        "links": {
+                                            "properties": {
+                                                "first": {
+                                                    "title": "first",
+                                                    "type": "string",
+                                                    "example": "http://127.0.0.1:8000/api/v1/organizations/radius?page=1"
+                                                },
+                                                "last": {
+                                                    "title": "last",
+                                                    "type": "string",
+                                                    "example": "http://127.0.0.1:8000/api/v1/organizations/radius?page=1"
+                                                },
+                                                "prev": {
+                                                    "title": "prev",
+                                                    "type": "null|string",
+                                                    "example": "null"
+                                                },
+                                                "next": {
+                                                    "title": "next",
+                                                    "type": "null|string",
+                                                    "example": "null"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "meta": {
+                                            "properties": {
+                                                "current_page": {
+                                                    "title": "current_page",
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "from": {
+                                                    "title": "from",
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "last_page": {
+                                                    "title": "last_page",
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "links": {
+                                                    "type": "object",
+                                                    "example": [
+                                                        {
+                                                            "url": null,
+                                                            "label": "&laquo; Previous",
+                                                            "active": false
+                                                        },
+                                                        {
+                                                            "url": "http://127.0.0.1:8000/api/v1/organizations/radius?page=1",
+                                                            "label": "1",
+                                                            "active": true
+                                                        },
+                                                        {
+                                                            "url": null,
+                                                            "label": "Next &raquo;",
+                                                            "active": false
+                                                        }
+                                                    ]
+                                                },
+                                                "path": {
+                                                    "title": "path",
+                                                    "type": "null|string",
+                                                    "example": "http://127.0.0.1:8000/api/v1/organizations/radius"
+                                                },
+                                                "per_page": {
+                                                    "title": "per_page",
+                                                    "type": "integer",
+                                                    "example": "15"
+                                                },
+                                                "to": {
+                                                    "title": "to",
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "total": {
+                                                    "title": "total",
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/organizations": {
+            "get": {
+                "tags": [
+                    "Organization"
+                ],
+                "summary": "Получение списка всех организаций по названию",
+                "operationId": "GetOrganization",
+                "parameters": [
+                    {
+                        "name": "serach_text",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. Список получен",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/OrganizationResource"
+                                            }
+                                        },
+                                        "links": {
+                                            "properties": {
+                                                "first": {
+                                                    "title": "first",
+                                                    "type": "string",
+                                                    "example": "http://127.0.0.1:8000/api/v1/organizations?page=1"
+                                                },
+                                                "last": {
+                                                    "title": "last",
+                                                    "type": "string",
+                                                    "example": "http://127.0.0.1:8000/api/v1/organizations?page=1"
+                                                },
+                                                "prev": {
+                                                    "title": "prev",
+                                                    "type": "null|string",
+                                                    "example": "null"
+                                                },
+                                                "next": {
+                                                    "title": "next",
+                                                    "type": "null|string",
+                                                    "example": "null"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "meta": {
+                                            "properties": {
+                                                "current_page": {
+                                                    "title": "current_page",
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "from": {
+                                                    "title": "from",
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "last_page": {
+                                                    "title": "last_page",
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "links": {
+                                                    "type": "object",
+                                                    "example": [
+                                                        {
+                                                            "url": null,
+                                                            "label": "&laquo; Previous",
+                                                            "active": false
+                                                        },
+                                                        {
+                                                            "url": "http://127.0.0.1:8000/api/v1/organizations?page=1",
+                                                            "label": "1",
+                                                            "active": true
+                                                        },
+                                                        {
+                                                            "url": null,
+                                                            "label": "Next &raquo;",
+                                                            "active": false
+                                                        }
+                                                    ]
+                                                },
+                                                "path": {
+                                                    "title": "path",
+                                                    "type": "null|string",
+                                                    "example": "http://127.0.0.1:8000/api/v1/organizations"
+                                                },
+                                                "per_page": {
+                                                    "title": "per_page",
+                                                    "type": "integer",
+                                                    "example": "15"
+                                                },
+                                                "to": {
+                                                    "title": "to",
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "total": {
+                                                    "title": "total",
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/organizations/search/activities": {
+            "get": {
+                "tags": [
+                    "Organization"
+                ],
+                "summary": "Получение списка всех организаций по виду деятельности",
+                "operationId": "GetOrganizationSearchActivities",
+                "parameters": [
+                    {
+                        "name": "serach_text",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. Список получен",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/OrganizationResource"
+                                            }
+                                        },
+                                        "links": {
+                                            "properties": {
+                                                "first": {
+                                                    "title": "first",
+                                                    "type": "string",
+                                                    "example": "http://127.0.0.1:8000/api/v1/organizations/search/activities?page=1"
+                                                },
+                                                "last": {
+                                                    "title": "last",
+                                                    "type": "string",
+                                                    "example": "http://127.0.0.1:8000/api/v1/organizations/search/activities?page=1"
+                                                },
+                                                "prev": {
+                                                    "title": "prev",
+                                                    "type": "null|string",
+                                                    "example": "null"
+                                                },
+                                                "next": {
+                                                    "title": "next",
+                                                    "type": "null|string",
+                                                    "example": "null"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "meta": {
+                                            "properties": {
+                                                "current_page": {
+                                                    "title": "current_page",
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "from": {
+                                                    "title": "from",
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "last_page": {
+                                                    "title": "last_page",
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "links": {
+                                                    "type": "object",
+                                                    "example": [
+                                                        {
+                                                            "url": null,
+                                                            "label": "&laquo; Previous",
+                                                            "active": false
+                                                        },
+                                                        {
+                                                            "url": "http://127.0.0.1:8000/api/v1/organizations/search/activities?page=1",
+                                                            "label": "1",
+                                                            "active": true
+                                                        },
+                                                        {
+                                                            "url": null,
+                                                            "label": "Next &raquo;",
+                                                            "active": false
+                                                        }
+                                                    ]
+                                                },
+                                                "path": {
+                                                    "title": "path",
+                                                    "type": "null|string",
+                                                    "example": "http://127.0.0.1:8000/api/v1/organizations/search/activities"
+                                                },
+                                                "per_page": {
+                                                    "title": "per_page",
+                                                    "type": "integer",
+                                                    "example": "15"
+                                                },
+                                                "to": {
+                                                    "title": "to",
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "total": {
+                                                    "title": "total",
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ActivityResource": {
+                "title": "ActivityResource",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "ID",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "name": {
+                        "title": "name",
+                        "type": "string",
+                        "example": "Еда"
+                    },
+                    "parent_id": {
+                        "title": "parent_id",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "children": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ActivityResource"
+                        }
+                    },
+                    "created_at": {
+                        "title": "created_at",
+                        "description": "Дата и время создания",
+                        "type": "string",
+                        "example": "1970-01-01T00:00:00.000000Z"
+                    },
+                    "updated_at": {
+                        "title": "updated_at",
+                        "description": "Дата и время обновления",
+                        "type": "string",
+                        "example": "1970-01-01T00:00:00.000000Z"
+                    }
+                },
+                "type": "object"
+            },
+            "BuildingResource": {
+                "title": "BuildingResource",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "ID",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "address": {
+                        "title": "address",
+                        "type": "string",
+                        "example": "11534 Jonatan Neck Gerholdshire, LA 06220-1012"
+                    },
+                    "longitude": {
+                        "title": "longitude",
+                        "type": "string",
+                        "example": "77.9952120"
+                    },
+                    "latitude": {
+                        "title": "latitude",
+                        "type": "string",
+                        "example": "77.9952120"
+                    },
+                    "created_at": {
+                        "title": "created_at",
+                        "description": "Дата и время создания",
+                        "type": "string",
+                        "example": "1970-01-01T00:00:00.000000Z"
+                    },
+                    "updated_at": {
+                        "title": "updated_at",
+                        "description": "Дата и время обновления",
+                        "type": "string",
+                        "example": "1970-01-01T00:00:00.000000Z"
+                    }
+                },
+                "type": "object"
+            },
+            "OrganizationPhoneResource": {
+                "title": "OrganizationPhoneResource",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "ID",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "phone": {
+                        "title": "phone",
+                        "type": "string",
+                        "example": "+79177788789"
+                    },
+                    "created_at": {
+                        "title": "created_at",
+                        "description": "Дата и время создания",
+                        "type": "string",
+                        "example": "1970-01-01T00:00:00.000000Z"
+                    },
+                    "updated_at": {
+                        "title": "updated_at",
+                        "description": "Дата и время обновления",
+                        "type": "string",
+                        "example": "1970-01-01T00:00:00.000000Z"
+                    }
+                },
+                "type": "object"
+            },
+            "OrganizationResource": {
+                "title": "OrganizationResource",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "ID",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "name": {
+                        "title": "name",
+                        "type": "string",
+                        "example": "ООО Рога и Копыта"
+                    },
+                    "phones": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/OrganizationPhoneResource"
+                        }
+                    },
+                    "activities": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ActivityResource"
+                        }
+                    },
+                    "building": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/BuildingResource"
+                        }
+                    },
+                    "created_at": {
+                        "title": "created_at",
+                        "description": "Дата и время создания",
+                        "type": "string",
+                        "example": "1970-01-01T00:00:00.000000Z"
+                    },
+                    "updated_at": {
+                        "title": "updated_at",
+                        "description": "Дата и время обновления",
+                        "type": "string",
+                        "example": "1970-01-01T00:00:00.000000Z"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "Sanctum": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Building"
+        },
+        {
+            "name": "Organization"
+        }
+    ]
+}
